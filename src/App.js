@@ -7,6 +7,7 @@ export default function App() {
   const [loading, setLoding] = useState(false);
   const [currentpage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(10);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +32,13 @@ export default function App() {
   return (
     <div className="container mt-5">
       <h2 className="text-primary mb-3">My Blog Posts</h2>
-      <Posts posts={currentPosts} loading={loading} />
+      <input
+        type="text"
+        className="form-control mb-2"
+        placeholder="Search...."
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <Posts posts={currentPosts} loading={loading} query={query} />
       <Pagination
         postPerPage={postPerPage}
         totalPosts={posts.length}
